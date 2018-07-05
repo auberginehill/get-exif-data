@@ -90,7 +90,7 @@
 
 ### Screenshot
 
-<img class="screenshot" title="screenshot" alt="screenshot" height="100%" width="100%" src="https://raw.githubusercontent.com/auberginehill/get-exif-data/master/Get-ExifData.jpg">
+<img class="screenshot" title="screenshot" alt="screenshot" height="100%" width="100%" src="https://raw.githubusercontent.com/auberginehill/get-exif-data/master/Get-ExifData.png">
 
 
 
