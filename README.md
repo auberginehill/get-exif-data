@@ -36,7 +36,7 @@
             <p>
                 The list of image files to be read is constructed in the command launching Get-ExifData by adding a full path of a folder (after <code>-Path</code> parameter) or by adding a full path of individual files (after <code>-File</code> parameter, multiple entries separated with a comma). The search for image files may also be done recursively by adding the <code>-Recurse</code> parameter the command launching Get-ExifData. If <code>-Path</code> and <code>-File</code> parameters are not defined, Get-ExifData reads non-recursively the image files, which reside in the "<code>$($env:USERPROFILE)\Pictures</code>" folder.</p>
             <p>
-                By default the CSV-file (<code>exif_log.csv</code>) is created into the User's own picture folder "<code>$($env:USERPROFILE)\Pictures</code>" but the default CSV-file destination may be changed with the <code>-Output</code> parameter. Shall the CSV-file already exist, Get-ExifData tries to add new info to the bottom of the CSV-file rather than overwrite the CSV-file. If the user wishes not to create any logs (<code>exif_log.csv</code>) or update any existing (<code>exif_log.csv</code>) files, the <code>-SuppressLog</code> parameter may be added to the command launching Get-ExifData.</p>
+                By default the CSV-file (<code>exif_log.csv</code>) is created into the User's own picture folder "<code>$($env:USERPROFILE)\Pictures</code>" and the default CSV-file destination may be changed with the <code>-Output</code> parameter. Shall the CSV-file already exist, Get-ExifData tries to add new info to the bottom of the CSV-file rather than overwrite the CSV-file. If the user wishes not to create any logs (<code>exif_log.csv</code>) or update any existing (<code>exif_log.csv</code>) files, the <code>-SuppressLog</code> parameter may be added to the command launching Get-ExifData.</p>
             <p>
                 The other available parameters (<code>-Force</code>, <code>-Open</code> and <code>-Audio</code>) are discussed in greater detail below. Please note, that if any of the individual parameter values include space characters, the individual value should be enclosed in quotation marks (single or double), so that PowerShell can interpret the command correctly.</p>
         </td>
@@ -104,7 +104,7 @@
             <ul>
                 <li>
                     <h5>Parameter <code>-Path</code></h5>
-                    <p>with aliases <code>-Directory</code>, <code>-DirectoryPath</code>, <code>-Folder</code> and <code>-FolderPath</code>.  Specifies the primary folder, from which the image files are checked for their EXIF data. The default <code>-Path</code> parameter is "<code>$($env:USERPROFILE)\Pictures</code>", which will be used, if any value for the <code>-Path</code> or the <code>-File</code> parameters is not included in the command launching Get-ExifData.</p>
+                    <p>with aliases <code>-Directory</code>, <code>-DirectoryPath</code>, <code>-Folder</code> and <code>-FolderPath</code>.  Specifies the primary folder, from which the image files are checked for their EXIF data. The default <code>-Path</code> parameter is "<code>$($env:USERPROFILE)\Pictures</code>", which will be used, if no value for the <code>-Path</code> or the <code>-File</code> parameters is included in the command launching Get-ExifData.</p>
                     <p>The value for the <code>-Path</code> parameter should be a valid file system path pointing to a directory (a full path of a folder such as <code>C:\Users\Dropbox\</code>). Furthermore, if the path includes space characters, please enclose the path in quotation marks (single or double). Multiple entries may be entered, if they are separated with a comma.</p>
                 </li>
             </ul>
@@ -123,7 +123,7 @@
                 <p>
                     <li>
                         <h5>Parameter <code>-Output</code></h5>
-                        <p>with aliases <code>-OutputFolder</code> and <code>-LogFileFolder</code>. Defines the folder/directory, where the CSV-file is created or updated.  The default <code>-Output</code> parameter is "<code>$($env:USERPROFILE)\Pictures</code>", which will be used, if any value for the <code>-Output</code> is not included in the command launching Get-ExifData.</p>
+                        <p>with aliases <code>-OutputFolder</code> and <code>-LogFileFolder</code>. Defines the folder/directory, where the CSV-file is created or updated.  The default <code>-Output</code> parameter is "<code>$($env:USERPROFILE)\Pictures</code>", which will be used, if no value for the <code>-Output</code> is included in the command launching Get-ExifData.</p>
                         <p>The value for the <code>-Output</code> parameter should be a valid file system path pointing to a directory (a full path of a folder such as <code>C:\Users\Dropbox\</code>). Furthermore, if the path includes space characters, please enclose the path in quotation marks (single or double).</p>
                         <p>The log file file name (<code>exif_log.csv</code>) is defined on row 78 with <code>$log_filename</code> variable and is thus "hard coded" into the script. The produced log file is UTF-8 encoded CSV-file with semi-colon as the separator.</p>
                     </li>
@@ -143,7 +143,7 @@
                 <p>
                     <li>
                         <h5>Parameter <code>-Open</code></h5>
-                        <p>If the <code>-Open</code> parameter is used in the command launching Get-ExifData and new EXIF data is found, the CSV-file destination folder (which is defined with the <code>-Output</code> parameter) is opened in the File Manager.</p>
+                        <p>If the <code>-Open</code> parameter is used in the command launching Get-ExifData and new EXIF data is found, the CSV-file destination folder (which is defined with the <code>-Output</code> parameter) is opened in the default File Manager.</p>
                     </li>
                 </p>
                 <p>
@@ -151,8 +151,8 @@
                         <h5>Parameter <code>-Force</code></h5>
                         <p>The <code>-Force</code> parameter affects the behaviour of Get-ExifData in two ways. If the <code>-Force</code> parameter is used with the...
                             <ol>
-                                <li><code>-Output</code> parameter, the CSV-file destination folder (defined with the <code>-Output</code> parameter) is created, without asking any further confirmations from the end-user. The new folder is created with the command <code>New-Item "$Output" -ItemType Directory -Force</code> which may not be powerfull enough to create a new folder inside any arbitrary (system) folder. The Get-ExifData may gain additional rights, if it's run in an elevated PowerShell window (but for the most cases that is not needed at all).</li>
-                                <li><code>-Open</code> parameter, the CSV-file destination folder (defined with the <code>-Output</code> parameter) is opened regardless whether any new EXIF data was found or not.</li>
+                                <li><code>-Output</code> parameter, the CSV-file destination folder (defined with the <code>-Output</code> parameter) is created, without asking any further confirmations from the end-user. The new folder is created with the command <code>New-Item "$Output" -ItemType Directory -Force</code> which may not be powerfull enough to create a new folder inside an arbitrary (system) folder. The Get-ExifData may gain additional rights, if it's run in an elevated PowerShell window (but for the most cases that is not needed at all).</li>
+                                <li><code>-Open</code> parameter, the CSV-file destination folder (defined with the <code>-Output</code> parameter) is opened in the default File Manager regardless whether any new EXIF data was found or not.</li>
                             </ol>
                         </p>
                     </li>
@@ -203,7 +203,7 @@
                             <tr>
                                 <td style="padding:6px"><code>"$($env:USERPROFILE)\Pictures"</code></td>
                                 <td style="padding:6px"><code>-Path</code></td>
-                                <td style="padding:6px">The folder for searching the image files for their EXIF data, if no <code>-Path</code> or <code>-File</code> parameter is used (a non-recursive search).</td>
+                                <td style="padding:6px">The folder where the image files are searched for their EXIF data, if no <code>-Path</code> or <code>-File</code> parameter is used (a non-recursive search).</td>
                             </tr>
                         </table>
                     </p>
@@ -227,6 +227,16 @@
             </ul>
         </td>
     </tr>
+    <tr>
+        <th></th>
+        <td style="padding:6px">
+            <ul>
+                <p>
+                    <li>The MakerNote EXIF tag is not included, since that's camera maker specific information. For more information, please see for instance the Tag ID 0x927c at <a href="https://sno.phy.queensu.ca/~phil/exiftool/TagNames/EXIF.html">EXIF Tags</a>.</li>
+                </p>
+            </ul>
+        </td>
+    </tr>     
 </table>
 
 
