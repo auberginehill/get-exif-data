@@ -1203,7 +1203,7 @@ parameters are not defined, Get-ExifData reads non-recursively the image files,
 which reside in the "$($env:USERPROFILE)\Pictures" folder.
 
 By default the CSV-file (exif_log.csv) is created into the User's own picture folder
-"$($env:USERPROFILE)\Pictures" but the default CSV-file destination may be changed
+"$($env:USERPROFILE)\Pictures" and the default CSV-file destination may be changed
 with the -Output parameter. Shall the CSV-file already exist, Get-ExifData tries to
 add new info to the bottom of the CSV-file rather than overwrite the CSV-file.
 If the user wishes not to create any logs (exif_log.csv) or update any existing
@@ -1219,7 +1219,7 @@ or double), so that PowerShell can interpret the command correctly.
 with aliases -Directory, -DirectoryPath, -Folder and -FolderPath. Specifies the
 primary folder, from which the image files are checked for their EXIF data. The
 default -Path parameter is "$($env:USERPROFILE)\Pictures", which will be used, if
-any value for the -Path or the -File parameters is not included in the command
+no value for the -Path or the -File parameters is included in the command
 launching Get-ExifData.
 
 The value for the -Path parameter should be a valid file system path pointing to
@@ -1241,8 +1241,8 @@ separated with a comma.
 .PARAMETER Output
 with aliases -OutputFolder and -LogFileFolder. Defines the folder/directory, where
 the CSV-file is created or updated.  The default -Output parameter is
-"$($env:USERPROFILE)\Pictures", which will be used, if any value for the -Output is
-not included in the command launching Get-ExifData.
+"$($env:USERPROFILE)\Pictures", which will be used, if no value for the -Output is
+included in the command launching Get-ExifData.
 
 The value for the -Output parameter should be a valid file system path pointing to
 a directory (a full path of a folder such as C:\Users\Dropbox\). Furthermore, if
@@ -1269,7 +1269,7 @@ nor updated.
 .PARAMETER Open
 If the -Open parameter is used in the command launching Get-ExifData and new
 EXIF data is found, the CSV-file destination folder (which is defined with
-the -Output parameter) is opened in the File Manager.
+the -Output parameter) is opened in the default File Manager.
 
 .PARAMETER Force
 The -Force parameter affects the behaviour of Get-ExifData in two ways. If the
@@ -1280,12 +1280,12 @@ The -Force parameter affects the behaviour of Get-ExifData in two ways. If the
         -Output parameter) is created, without asking any further confirmations
         from the end-user. The new folder is created with the command
         New-Item "$Output" -ItemType Directory -Force which may not be powerfull
-        enough to create a new folder inside any arbitrary (system) folder.
+        enough to create a new folder inside an arbitrary (system) folder.
         The Get-ExifData may gain additional rights, if it's run in an elevated
         PowerShell window (but for the most cases that is not needed at all).
     2.  -Open parameter, the CSV-file destination folder (defined with the
-        -Output parameter) is opened regardless whether any new EXIF data was
-        found or not.
+        -Output parameter) is opened in the default File Manager regardless 
+        whether any new EXIF data was found or not.
 
 .PARAMETER Audio
 If the -Audio parameter is used in the command launching Get-ExifData and new
@@ -1304,8 +1304,8 @@ defined with the -Output parameter, if the -SuppressLog parameter is not used.
     "$($env:USERPROFILE)\Pictures\exif_log.csv" : -Output       : CSV log file containing EXIF data
                                                   (concerning
                                                   the folder)
-    "$($env:USERPROFILE)\Pictures"              : -Path         : The folder for searching the
-                                                                  image files for their EXIF data,
+    "$($env:USERPROFILE)\Pictures"              : -Path         : The folder where the image files 
+                                                                  are searched for their EXIF data,
                                                                   if no -Path or -File parameter
                                                                   is used (a non-recursive search).
 
@@ -1314,6 +1314,10 @@ defined with the -Output parameter, if the -SuppressLog parameter is not used.
 Please note that all the parameters can be used in one get EXIF data command, and
 that each of the parameters can be "tab completed" before typing them fully (by
 pressing the [tab] key).
+
+The MakerNote EXIF tag is not included, since that's camera maker specific 
+information. For more information, please see for instance the Tag ID 0x927c 
+at https://sno.phy.queensu.ca/~phil/exiftool/TagNames/EXIF.html
 
     Homepage:           https://github.com/auberginehill/get-exif-data
     Short URL:          http://tinyurl.com/ycbhtpba
